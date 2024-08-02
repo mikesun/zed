@@ -8,6 +8,7 @@ use crate::{prelude::*, Disclosure};
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy, Default)]
 pub enum ListItemSpacing {
     #[default]
+    Comfortable,
     Dense,
     Sparse,
 }
@@ -44,6 +45,7 @@ impl ListItem {
             id: id.into(),
             disabled: false,
             selected: false,
+            // spacing: ListItemSpacing::Comfortable,
             spacing: ListItemSpacing::Dense,
             indent_level: 0,
             indent_step_size: px(12.),
@@ -187,7 +189,8 @@ impl RenderOnce for ListItem {
                     .gap_1()
                     .px_1p5()
                     .map(|this| match self.spacing {
-                        ListItemSpacing::Dense => this,
+                        ListItemSpacing::Comfortable => this,
+                        ListItemSpacing::Dense => this.py_neg_px(),
                         ListItemSpacing::Sparse => this.py_1(),
                     })
                     .group("list_item")
