@@ -45,8 +45,7 @@ impl ListItem {
             id: id.into(),
             disabled: false,
             selected: false,
-            // spacing: ListItemSpacing::Comfortable,
-            spacing: ListItemSpacing::Dense,
+            spacing: ListItemSpacing::Comfortable,
             indent_level: 0,
             indent_step_size: px(12.),
             start_slot: None,
@@ -189,8 +188,8 @@ impl RenderOnce for ListItem {
                     .gap_1()
                     .px_1p5()
                     .map(|this| match self.spacing {
-                        ListItemSpacing::Comfortable => this,
                         ListItemSpacing::Dense => this.py_neg_px(),
+                        ListItemSpacing::Comfortable => this,
                         ListItemSpacing::Sparse => this.py_1(),
                     })
                     .group("list_item")

@@ -38,7 +38,9 @@ use std::{
     time::Duration,
 };
 use theme::ThemeSettings;
-use ui::{prelude::*, v_flex, ContextMenu, Icon, KeyBinding, Label, ListItem, Tooltip};
+use ui::{
+    prelude::*, v_flex, ContextMenu, Icon, KeyBinding, Label, ListItem, ListItemSpacing, Tooltip,
+};
 use util::{maybe, ResultExt, TryFutureExt};
 use workspace::{
     dock::{DockPosition, Panel, PanelEvent},
@@ -2103,6 +2105,7 @@ impl ProjectPanel {
                 ListItem::new(entry_id.to_proto() as usize)
                     .indent_level(depth)
                     .indent_step_size(px(settings.indent_size))
+                    .spacing(ListItemSpacing::Dense)
                     .selected(is_marked || is_active)
                     .when_some(canonical_path, |this, path| {
                         this.end_slot::<AnyElement>(
